@@ -35,14 +35,13 @@ def rotate_image(image, angle):
 
 
 # Load an image
-input_image_path = r"image_deskew\input_image\qr.jpeg"
+input_image_path = "input image path"
 image = cv2.imread(input_image_path)
 
 # Apply deskewing
 deskewed_image = deskew(image)
 
-output_folder = r"image_deskew\output_image"
-
+output_folder = "output folder path"
 # Ensure the output folder exists
 os.makedirs(output_folder, exist_ok=True)
 
