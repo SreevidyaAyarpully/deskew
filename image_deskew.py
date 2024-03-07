@@ -34,17 +34,28 @@ def rotate_image(image, angle):
 
 
 
-# Load an image
-input_image_path = "input image path"
-image = cv2.imread(input_image_path)
+# Input and output folders
+input_folder = r"image_deskew\input_image"
+output_folder = r"image_deskew\output_image"
 
-# Apply deskewing
-deskewed_image = deskew(image)
-
-output_folder = "output folder path"
 # Ensure the output folder exists
 os.makedirs(output_folder, exist_ok=True)
 
-# Save the deskewed image to the output folder
-output_image_path = os.path.join(output_folder, "deskewed_image.jpg")
-cv2.imwrite(output_image_path, deskewed_image)
+# Iterate through all files in the input folder
+for filename in os.listdir(input_folder):
+    if filename.endswith(('.jpg', '.jpeg', '.png')):  # Add more extensions if needed
+        # Construct the full path for the input image
+        input_image_path = os.path.join(input_folder, filename)
+
+        # Load the image
+        image = cv2.imread(input_image_path)
+
+        # Apply deskewing
+        deskewed_image = deskew(image)
+
+        # Construct the output image path with the desired filename
+        output_image_filename = f"{os.path.splitext(filename)[0]}_deskew.jpg"
+        output_image_path = os.path.join(output_folder, output_image_filename)
+
+        # Save the deskewed image to the output folder
+        cv2.imwrite(output_image_path, deskewed_image)
